@@ -1,11 +1,18 @@
 global.__base = __dirname+"/";
 
-const app = require('express')();
-const server = require('http').Server(app);
+const bodyParser = require('body-parser');
+const express = require('express');
+const mongoose = require('mongoose');
 const router = require('./router');
 
+const MONGO_URL = "mongodb://127.0.0.1/haute_or_naute";
+
+mongoose.connect(MONGO_URL);
+const app = express();
+
+app.use(bodyParser({extended: false}));
 app.use('/', router);
 
-server.listen(3000, function () {
+app.listen(3000, function () {
 	  console.log(`Listening on port 3000!`);
 });
