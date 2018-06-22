@@ -55,7 +55,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       inject: false,
       filename: '../client/index.html',
-      template: path.resolve("./client/index.html")
+      template: path.resolve("./public/index.html")
     }),
 	],
   devtool: "source-map",
