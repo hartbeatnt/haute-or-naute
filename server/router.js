@@ -23,7 +23,7 @@ router.post('/shoes', (req, res) => {
 })
 
 router.get('/shoes', (req, res) => {
-
+	
 })
 
 module.exports = router;
