@@ -7,9 +7,8 @@ let wds = process.platform === 'win32'
   : './node_modules/webpack-dev-server/bin/webpack-dev-server.js' ;
 
 [
-  [nodemon, ['--ignore', 'client/', 'server.js', '--port', '3001']],
-  [wds, ["--config", "../config/webpack.config.js", "--mode", "development"]],
-  ['node', ['build', '-w']],
+  [nodemon, ['--ignore', 'client/', 'server/index.js', '--port', '3001']],
+  [wds, ["--config", "config/webpack.config.js", "--mode", "development", "--port", "3000"]]
 ].forEach((args) => {
   const child = spawn.apply(spawn, args).on('error', err => { throw err; });
   child.stdout.on('data', data => process.stdout.write(data+''));
