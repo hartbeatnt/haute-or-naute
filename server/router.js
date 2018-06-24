@@ -1,31 +1,40 @@
 const router = require('express').Router();
 const path = require('path');
 
-const Shoe = require('./models/shoe');
+const ShoeModel = require('./models/shoe');
 
-router.get('/', (req, res) => {
-	res.sendFile(path.join(__base + '../public/index.html'));
+router.get('/', async (req, res) => {
+	try {
+		await res.sendFile(path.join(__base + '../public/index.html'));
+	} catch (err) {
+		res.send(err);
+	}
 });
 
-router.post('/shoes', (req, res) => {
-	const shoe = new Shoe({
-		url: req.body.url,
-		gender: req.body.gender,
-		category: req.body.category
+router.post('/shoes', async (req, res) => {
+	const { url, gender, category } = req.body;
+
+	const shoe = new ShoeModel({
+		url,
+		gender,
+		category,
 	});
 
-	shoe.save(err => {
-		if (err) return console.log('oh no!');
-		console.log('saved');
-	})
-	res.send()
-})
+	try {
+		await shoe.save();
+		res.send(shoe);
+	} catch(err) {
+		res.send(err);
+	}
+});
 
-router.get('/shoes', (req, res) => {
-	const shoes = Shoe.find({}, (err, shoes) => {
-		if (err) res.json(err);
-		res.json(shoes);
-	})
-})
+router.get('/shoes', async (req, res) => {
+	try {
+		const shoes = await Shoe.find();
+		res.send(shoes);
+	} catch (err) {
+		res.send(err);
+	}
+});
 
 module.exports = router;
