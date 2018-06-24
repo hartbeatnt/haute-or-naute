@@ -6,7 +6,7 @@ export default class ShoeComponent extends Component {
     this.state = {};
   }
   render() {
-    const { shoeImageUrl, isLeft } = this.props;
+    const { shoeImageUrl, isLeft, onClick } = this.props;
     return (
       <div
         style={{
@@ -20,6 +20,7 @@ export default class ShoeComponent extends Component {
             display: 'flex',
             margin: 'auto',
           }}
+          onClick={onClick}
           src={shoeImageUrl}
         />
       </div>
