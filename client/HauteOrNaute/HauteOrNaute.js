@@ -13,6 +13,26 @@ const shoesPlaceholder = [
     url:
       'https://www.hautelookcdn.com/resizer/434x650/products/REETA-1/large/8174150.jpg',
   },
+  {
+    shoeId: 'third',
+    url:
+      'https://www.hautelookcdn.com/products/NL1800803/large/8740694.jpg?interpolation=lanczos-none&downsize=434:650&output-quality=90&output-format=jpeg',
+  },
+  {
+    shoeId: 'fourth',
+    url:
+      'https://www.hautelookcdn.com/resizer/434x650/products/REETA-1/large/8174150.jpg',
+  },
+  {
+    shoeId: 'fifth',
+    url:
+      'https://www.hautelookcdn.com/products/NL1800803/large/8740694.jpg?interpolation=lanczos-none&downsize=434:650&output-quality=90&output-format=jpeg',
+  },
+  {
+    shoeId: 'sixth',
+    url:
+      'https://www.hautelookcdn.com/resizer/434x650/products/REETA-1/large/8174150.jpg',
+  },
 ];
 
 export default class HauteOrNaute extends Component {
@@ -33,17 +53,26 @@ export default class HauteOrNaute extends Component {
   }
 
   componentDidMount() {
-    //api call to get images
     this.getShoes();
   }
 
-  randomlySelectTwoPairsOfShoes() {
-    return shoesPlaceholder;
+  randomlySelectTwoPairsOfShoes(shoes) {
+    const shoesLength = shoes.length;
+    const randomIndex = Math.floor(Math.random() * shoesLength);
+    const randomShoe = shoes[randomIndex];
+    this.state.randomShoes.push(randomShoe);
+    shoes.splice(randomIndex, 1);
+    if (this.state.randomShoes.length === 1) {
+      this.randomlySelectTwoPairsOfShoes(shoes);
+    }
+    return shoes;
   }
 
   getShoes() {
-    const randomShoes = this.randomlySelectTwoPairsOfShoes();
-    this.setState({ shoes: shoesPlaceholder, randomShoes });
+    //api call to get images
+    const shoes = shoesPlaceholder;
+    this.randomlySelectTwoPairsOfShoes(shoes);
+    this.setState({ shoes });
   }
 
   onClickLeft(event) {
@@ -64,24 +93,26 @@ export default class HauteOrNaute extends Component {
   }
 
   render() {
+    const { randomShoes } = this.state;
+    console.log(randomShoes);
     return (
       <div>
-        <div className={style.container}>
-          {' '}
-          <Shoe
-            shoeImageUrl={
-              'https://www.hautelookcdn.com/products/NL1800803/large/8740694.jpg?interpolation=lanczos-none&downsize=434:650&output-quality=90&output-format=jpeg'
-            }
-            isLeft
-            onClick={this.onClickLeft}
-          />{' '}
-          <Shoe
-            shoeImageUrl={
-              'https://www.hautelookcdn.com/resizer/434x650/products/REETA-1/large/8174150.jpg'
-            }
-            onClick={this.onClickRight}
-          />{' '}
-        </div>
+        {randomShoes.length === 2 ? (
+          <div className={style.container}>
+            {' '}
+            <Shoe
+              shoeImageUrl={randomShoes[0].url}
+              isLeft
+              onClick={this.onClickLeft}
+            />{' '}
+            <Shoe
+              shoeImageUrl={randomShoes[1].url}
+              onClick={this.onClickRight}
+            />{' '}
+          </div>
+        ) : (
+          <div>Loading...</div>
+        )}
       </div>
     );
   }
