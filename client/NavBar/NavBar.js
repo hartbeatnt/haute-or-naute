@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import style from './NavBar.css';
 
 export default class NavBar extends Component {
   constructor(props) {
@@ -7,10 +8,10 @@ export default class NavBar extends Component {
   }
   render() {
     return (
-      <div>
+      <div className={style.container}>
         <span>
-          <button> Haute Or Naute </button>
-          <button> My Style </button>
+          <span className={style.buttons}> Play </span>
+          <span className={style.buttons}> What's Haute </span>
         </span>
       </div>
     );

@@ -10,7 +10,6 @@ export default class HauteOrNaute extends Component {
   render() {
     return (
       <div>
-        Haute or Not?
         <div className={style.container}>
           {' '}
           <Shoe
