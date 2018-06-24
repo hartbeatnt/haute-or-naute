@@ -6,10 +6,22 @@ export default class ShoeComponent extends Component {
     this.state = {};
   }
   render() {
-    const { shoeImageUrl } = this.props;
+    const { shoeImageUrl, isLeft } = this.props;
     return (
-      <div style={{ width: '50%', display: 'flex', column: 'false' }}>
-        <img src={shoeImageUrl} />
+      <div
+        style={{
+          width: '40%',
+          margin: isLeft ? '16px 8px 16px 16px' : '16px 16px 16px 8px',
+        }}
+      >
+        <img
+          style={{
+            width: '100%',
+            display: 'flex',
+            margin: 'auto',
+          }}
+          src={shoeImageUrl}
+        />
       </div>
     );
   }

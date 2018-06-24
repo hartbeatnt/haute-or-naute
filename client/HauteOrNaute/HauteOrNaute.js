@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Shoe from '../ShoeComponent/ShoeComponent';
+import style from './HauteOrNaute.css';
 
 export default class HauteOrNaute extends Component {
   constructor(props) {
@@ -10,12 +11,13 @@ export default class HauteOrNaute extends Component {
     return (
       <div>
         Haute or Not?
-        <div style={{ display: 'flex' }}>
+        <div className={style.container}>
           {' '}
           <Shoe
             shoeImageUrl={
               'https://www.hautelookcdn.com/products/NL1800803/large/8740694.jpg?interpolation=lanczos-none&downsize=434:650&output-quality=90&output-format=jpeg'
             }
+            isLeft
           />{' '}
           <Shoe
             shoeImageUrl={
