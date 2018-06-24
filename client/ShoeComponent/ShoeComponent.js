@@ -6,6 +6,11 @@ export default class ShoeComponent extends Component {
     this.state = {};
   }
   render() {
-    return <div>Shoe</div>;
+    const { shoeImageUrl } = this.props;
+    return (
+      <div style={{ width: '50%', display: 'flex', column: 'false' }}>
+        <img src={shoeImageUrl} />
+      </div>
+    );
   }
 }
