@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ShoePair from './ShoePair';
 import superagent from 'superagent';
 
 export default class Summary extends Component {
@@ -34,6 +35,24 @@ export default class Summary extends Component {
   }
 
   render() {
-    return <div />;
+    const { history } = this.state;
+    return (
+      <div>
+        {history ? (
+          <div>
+            {history.map(entry => {
+              if (entry.hauteUrl) {
+                return (
+                  <ShoePair
+                    hauteUrl={entry.hauteUrl}
+                    nauteUrl={entry.nauteUrl}
+                  />
+                );
+              }
+            })}
+          </div>
+        ) : null}
+      </div>
+    );
   }
 }
