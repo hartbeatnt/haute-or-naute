@@ -16,7 +16,7 @@ export default class Summary extends Component {
 
   async getHistory() {
     try {
-      return superagent.get('http://localhost:3000/user/demo').then(
+      return superagent.get('http://localhost:3000/api/user/demo').then(
         res => {
           return res.body;
         },
@@ -44,6 +44,7 @@ export default class Summary extends Component {
               if (entry.hauteUrl) {
                 return (
                   <ShoePair
+                    key={entry.matchupId}
                     hauteUrl={entry.hauteUrl}
                     nauteUrl={entry.nauteUrl}
                   />

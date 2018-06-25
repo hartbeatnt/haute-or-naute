@@ -40,7 +40,7 @@ export default class HauteOrNaute extends Component {
   async getShoes() {
     //api call to get shoes
     try {
-      return superagent.get('http://localhost:3000/shoes').then(
+      return superagent.get('http://localhost:3000/api/shoes').then(
         res => {
           return res.body;
         },
@@ -69,7 +69,7 @@ export default class HauteOrNaute extends Component {
   async submitHauteOrNaute(hauteUrl, nauteUrl, hauteId, nauteId, userId) {
     try {
       return superagent
-        .post('http://localhost:3000/matchups')
+        .post('http://localhost:3000/api/matchups')
         .send({ hauteUrl, nauteUrl, hauteId, nauteId, userId })
         .then(
           res => {
