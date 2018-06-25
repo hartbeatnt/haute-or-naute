@@ -7,6 +7,8 @@ module.exports = class MatchupController {
     const matchupId = UUID();
     const matchup = new Matchup({
       matchupId,
+      hauteUrl,
+      nauetUrl,
       hauteId,
       nauteId,
       userId,
