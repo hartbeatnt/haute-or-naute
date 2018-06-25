@@ -42,7 +42,6 @@ export default class HauteOrNaute extends Component {
       shoes: [],
       randomShoes: [],
       haute: '',
-      naute: '',
     };
     this.randomlySelectTwoPairsOfShoes = this.randomlySelectTwoPairsOfShoes.bind(
       this,
@@ -80,21 +79,19 @@ export default class HauteOrNaute extends Component {
     console.log(event.target.src);
     const { randomShoes } = this.state;
     console.log(randomShoes, 'hnshoes');
-    // const haute = randomShoes[0];
-    // const naute = randomShoes[1];
+    this.setState({ haute: 'left' });
   }
 
   onClickRight(event) {
     event.preventDefault();
     console.log(event.target.src);
     const { randomShoes } = this.state;
-    // const haute = randomShoes[1];
-    // const naute = randomShoes[0];
+    this.setState({ haute: 'right' });
   }
 
   render() {
-    const { randomShoes } = this.state;
-    console.log(randomShoes);
+    const { randomShoes, haute } = this.state;
+    console.log(haute, 'haute');
     return (
       <div>
         {randomShoes.length === 2 ? (
@@ -104,10 +101,12 @@ export default class HauteOrNaute extends Component {
               shoeImageUrl={randomShoes[0].url}
               isLeft
               onClick={this.onClickLeft}
+              isHaute={haute === 'left'}
             />{' '}
             <Shoe
               shoeImageUrl={randomShoes[1].url}
               onClick={this.onClickRight}
+              isHaute={haute === 'right'}
             />{' '}
           </div>
         ) : (

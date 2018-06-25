@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Fire from './Fire';
 
 export default class ShoeComponent extends Component {
   constructor(props) {
@@ -6,7 +7,7 @@ export default class ShoeComponent extends Component {
     this.state = {};
   }
   render() {
-    const { shoeImageUrl, isLeft, onClick } = this.props;
+    const { shoeImageUrl, isLeft, onClick, isHaute } = this.props;
     return (
       <div
         style={{
@@ -23,6 +24,11 @@ export default class ShoeComponent extends Component {
           onClick={onClick}
           src={shoeImageUrl}
         />
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <Fire isHaute={isHaute} />
+          <Fire isHaute={isHaute} />
+          <Fire isHaute={isHaute} />
+        </div>
       </div>
     );
   }
