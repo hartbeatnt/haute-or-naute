@@ -3,12 +3,12 @@ const Matchup = require('../models/matchup');
 
 module.exports = class MatchupController {
   saveMatchup (query) {
-    const { userId , hauteId, nauteId } = query;
+    const { userId , hauteUrl, nauteUrl, hauteId, nauteId } = query;
     const matchupId = UUID();
     const matchup = new Matchup({
       matchupId,
       hauteUrl,
-      nauetUrl,
+      nauteUrl,
       hauteId,
       nauteId,
       userId,
