@@ -1,39 +1,7 @@
 import React, { Component } from 'react';
 import Shoe from '../ShoeComponent/ShoeComponent';
 import style from './HauteOrNaute.css';
-
-const shoesPlaceholder = [
-  {
-    shoeId: 'first',
-    url:
-      'https://www.hautelookcdn.com/products/NL1800803/large/8740694.jpg?interpolation=lanczos-none&downsize=434:650&output-quality=90&output-format=jpeg',
-  },
-  {
-    shoeId: 'second',
-    url:
-      'https://www.hautelookcdn.com/resizer/434x650/products/REETA-1/large/8174150.jpg',
-  },
-  {
-    shoeId: 'third',
-    url:
-      'https://www.hautelookcdn.com/products/NL1800803/large/8740694.jpg?interpolation=lanczos-none&downsize=434:650&output-quality=90&output-format=jpeg',
-  },
-  {
-    shoeId: 'fourth',
-    url:
-      'https://www.hautelookcdn.com/resizer/434x650/products/REETA-1/large/8174150.jpg',
-  },
-  {
-    shoeId: 'fifth',
-    url:
-      'https://www.hautelookcdn.com/products/NL1800803/large/8740694.jpg?interpolation=lanczos-none&downsize=434:650&output-quality=90&output-format=jpeg',
-  },
-  {
-    shoeId: 'sixth',
-    url:
-      'https://www.hautelookcdn.com/resizer/434x650/products/REETA-1/large/8174150.jpg',
-  },
-];
+import superagent from 'superagent';
 
 export default class HauteOrNaute extends Component {
   constructor(props) {
@@ -47,12 +15,13 @@ export default class HauteOrNaute extends Component {
       this,
     );
     this.getShoes = this.getShoes.bind(this);
+    this.getShoesAndMatchUp = this.getShoesAndMatchUp.bind(this);
     this.onClickLeft = this.onClickLeft.bind(this);
     this.onClickRight = this.onClickRight.bind(this);
   }
 
   componentDidMount() {
-    this.getShoes();
+    this.getShoesAndMatchUp();
   }
 
   randomlySelectTwoPairsOfShoes(shoes) {
@@ -67,11 +36,32 @@ export default class HauteOrNaute extends Component {
     return shoes;
   }
 
-  getShoes() {
+  async getShoes() {
+    try {
+      return superagent.get('http://localhost:3000/shoes').then(
+        res => {
+          console.log(res, 'res');
+          return res.body;
+        },
+        err => {
+          throw err;
+        },
+      );
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  async getShoesAndMatchUp() {
     //api call to get images
-    const shoes = shoesPlaceholder;
-    this.randomlySelectTwoPairsOfShoes(shoes);
-    this.setState({ shoes });
+    try {
+      const shoes = await this.getShoes();
+      console.log(shoes, 'shoes');
+      this.randomlySelectTwoPairsOfShoes(shoes);
+      this.setState({ shoes });
+    } catch (err) {
+      throw err;
+    }
   }
 
   onClickLeft(event) {
