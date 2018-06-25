@@ -7,7 +7,6 @@ export default class Fire extends Component {
   }
   render() {
     const { showFire, isHaute } = this.props;
-    console.log(isHaute, 'isHaute');
     return (
       <span>
         {isHaute ? (

@@ -56,7 +56,6 @@ export default class HauteOrNaute extends Component {
   async getShoesAndMatchUp() {
     try {
       const shoes = await this.getShoes();
-      console.log(shoes);
       if (this.state.randomShoes.length === 2) {
         this.setState({ randomShoes: [], haute: '' });
       }
@@ -94,7 +93,7 @@ export default class HauteOrNaute extends Component {
       randomShoes[1].shoeId,
       'demo',
     );
-    setTimeout(() => this.getShoesAndMatchUp(), 500);
+    setTimeout(() => this.getShoesAndMatchUp(), 1000);
   }
 
   onClickRight(event) {
