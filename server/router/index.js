@@ -7,15 +7,7 @@ const MatchupController = require(__base + 'controllers/matchup');
 const { createShoe, getShoes } = new ShoeController();
 const {	saveMatchup, getUserMatchupHistory } = new MatchupController();
 
-router.get('/', async (req, res) => {
-	try {
-		await res.sendFile(path.join(__base + '../public/index.html'));
-	} catch (err) {
-		res.status(500).send(err);
-	}
-});
-
-router.get('/shoes', async (req, res) => {
+router.get('/api/shoes', async (req, res) => {
 	try {
 		const shoes = await getShoes();
 		res.send(shoes);
@@ -24,7 +16,7 @@ router.get('/shoes', async (req, res) => {
 	}
 });
 
-router.post('/shoes', async (req, res) => {
+router.post('/api/shoes', async (req, res) => {
 	try {
 		const shoe = await createShoe(req.body);
 		res.send(shoe);
@@ -33,7 +25,7 @@ router.post('/shoes', async (req, res) => {
 	}
 });
 
-router.post('/matchups', async (req, res) => {
+router.post('/api/matchups', async (req, res) => {
 	try {
 		const matchup = await saveMatchup(req.body);
 		res.send(matchup);
@@ -42,13 +34,21 @@ router.post('/matchups', async (req, res) => {
 	}
 });
 
-router.get('/user/:userId', async (req, res) => {
+router.get('/api/user/:userId', async (req, res) => {
 	try {
 		const matchups = await getUserMatchupHistory(req.params);
 		res.send(matchups);
 	} catch(err) {
 		res.status(500).send(err);
 	}
-})
+});
+
+router.get('*', async (req, res) => {
+	try {
+		await res.sendFile(path.join(__base + '../public/index.html'));
+	} catch (err) {
+		res.status(500).send(err);
+	}
+});
 
 module.exports = router;
