@@ -66,11 +66,11 @@ export default class HauteOrNaute extends Component {
     }
   }
 
-  async submitHauteOrNaute(hauteId, nauteId, userId) {
+  async submitHauteOrNaute(hauteUrl, nauteUrl, hauteId, nauteId, userId) {
     try {
       return superagent
         .post('http://localhost:3000/matchups')
-        .send({ hauteId, nauteId, userId })
+        .send({ hauteUrl, nauteUrl, hauteId, nauteId, userId })
         .then(
           res => {
             return res.body;
@@ -89,6 +89,8 @@ export default class HauteOrNaute extends Component {
     const { randomShoes } = this.state;
     this.setState({ haute: 'left' });
     this.submitHauteOrNaute(
+      randomShoes[0].url,
+      randomShoes[1].url,
       randomShoes[0].shoeId,
       randomShoes[1].shoeId,
       'demo',
@@ -101,6 +103,8 @@ export default class HauteOrNaute extends Component {
     const { randomShoes } = this.state;
     this.setState({ haute: 'right' });
     this.submitHauteOrNaute(
+      randomShoes[1].url,
+      randomShoes[0].url,
       randomShoes[1].shoeId,
       randomShoes[0].shoeId,
       'demo',
