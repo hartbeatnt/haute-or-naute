@@ -11,7 +11,8 @@ export default class ShoeComponent extends Component {
     return (
       <div
         style={{
-          width: '40%',
+          width: '30%',
+          cursor: 'pointer',
           margin: isLeft ? '16px 8px 16px 16px' : '16px 16px 16px 8px',
         }}
       >

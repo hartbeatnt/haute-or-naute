@@ -31,7 +31,8 @@ export default class Summary extends Component {
 
   async getHauteOrNotSelections() {
     const history = await this.getHistory();
-    this.setState({ history });
+    const recentHistory = history.reverse();
+    this.setState({ history: recentHistory });
   }
 
   render() {

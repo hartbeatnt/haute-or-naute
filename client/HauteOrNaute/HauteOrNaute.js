@@ -116,6 +116,16 @@ export default class HauteOrNaute extends Component {
     const { randomShoes, haute } = this.state;
     return (
       <div>
+        <div
+          style={{
+            textAlign: 'center',
+            fontSize: '20px',
+            margin: '20px',
+            fontFamily: 'Arial',
+          }}
+        >
+          Click on the haute shoe!
+        </div>
         {randomShoes.length === 2 ? (
           <div className={style.container}>
             {' '}
